@@ -1,0 +1,11 @@
+.editor{
+    margin-top: 15%;
+    margin-left: 10%;
+    margin-right: 10%;
+    position: absolute;
+    width: 80%;
+    height: 70%;
+    overflow: auto;
+    border-radius: 2px;
+    background: white;
+}

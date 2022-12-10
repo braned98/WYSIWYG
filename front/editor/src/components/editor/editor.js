@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
+import './editor.css';
 
 const initialValue = [
   {
@@ -13,7 +14,7 @@ function Editor() {
   const [editor] = useState(() => withReact(createEditor()));
 
   return (
-    <div>
+    <div className="editor">
       <Slate editor={editor} value={initialValue}>
         <Editable />
       </Slate>
