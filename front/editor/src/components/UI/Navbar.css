@@ -1,0 +1,11 @@
+.navbar {
+    background: #33CC33;
+    position: absolute;
+    height: 6%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
