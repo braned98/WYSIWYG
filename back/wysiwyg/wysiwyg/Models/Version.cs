@@ -9,6 +9,7 @@ namespace wysiwyg.Models
 		[Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+		public double VersionTag { get; set; }
 		public string Content { get; set; }
 
 		public Version(string content)
