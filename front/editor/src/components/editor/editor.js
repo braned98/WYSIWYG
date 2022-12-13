@@ -11,7 +11,7 @@ import useEditorConfig from "../../hooks/use-editor-config";
 function Editor({document, onChange}) {
   const [editor] = useState(() => withReact(createEditor()));
 
-  const {renderLeaf} = useEditorConfig(editor);
+  const {renderLeaf, KeyBindings} = useEditorConfig(editor);
 
   const [selection, setSelection] = useSelection(editor);
 
@@ -23,11 +23,16 @@ function Editor({document, onChange}) {
     [editor.selection, onChange, setSelection]
   );
 
+  const onKeyDown = useCallback(
+    (event) => KeyBindings.onKeyDown(editor, event),
+    [KeyBindings, editor]
+  );
+
   return (
     <div className="editor">
       <Slate editor={editor} value={document} onChange={onChangeHandler}>
         <Toolbar selection={selection} />
-        <Editable renderLeaf={renderLeaf} />
+        <Editable renderLeaf={renderLeaf} onKeyDown={onKeyDown} />
       </Slate>
     </div>
   );
