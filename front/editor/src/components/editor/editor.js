@@ -4,11 +4,14 @@ import { Slate, Editable, withReact } from "slate-react";
 import './editor.css';
 import useSelection  from '../../hooks/use-selection';
 import Toolbar from "./Toolbar";
+import useEditorConfig from "../../hooks/use-editor-config";
 
 
 
 function Editor({document, onChange}) {
   const [editor] = useState(() => withReact(createEditor()));
+
+  const {renderLeaf} = useEditorConfig(editor);
 
   const [selection, setSelection] = useSelection(editor);
 
@@ -24,7 +27,7 @@ function Editor({document, onChange}) {
     <div className="editor">
       <Slate editor={editor} value={document} onChange={onChangeHandler}>
         <Toolbar selection={selection} />
-        <Editable />
+        <Editable renderLeaf={renderLeaf} />
       </Slate>
     </div>
   );
