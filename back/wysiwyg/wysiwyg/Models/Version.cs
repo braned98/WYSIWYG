@@ -19,3 +19,6 @@ namespace wysiwyg.Models
 	}
 }
 
+
+
+//Referenca prema dokumentu da bude
