@@ -2,6 +2,8 @@ import './App.css';
 
 import Editor from './components/editor/editor';
 import Navbar from './components/UI/Navbar';
+import RegistrationForm from './components/user/RegistrationForm';
+import LoginForm from './components/user/LoginForm';
 
 import { useState } from 'react';
 
@@ -16,7 +18,9 @@ function App() {
   return (
     <div className='main'>
       <Navbar></Navbar>
-      <Editor document={document} onChange={updateDocument} />
+      {true && <RegistrationForm></RegistrationForm>}
+      {false && <LoginForm></LoginForm>}
+      {false && <Editor document={document} onChange={updateDocument} />}
     </div>
   );
 }
