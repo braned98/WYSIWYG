@@ -15,6 +15,15 @@ const RegistrationForm = (props) => {
   } = useInput((value) => value.trim() !== "");
 
   const {
+    value: enteredUserName,
+    isValid: enteredUserNameIsValid,
+    hasError: userNameInputHasError,
+    valueChangeHandler: userNameChangeHandler,
+    inputBlurHandler: userNameBlurHandler,
+    reset: resetUserNameInput,
+  } = useInput((value) => value.trim() !== "");
+
+  const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
     hasError: emailInputHasError,
@@ -23,9 +32,33 @@ const RegistrationForm = (props) => {
     reset: resetEmailInput,
   } = useInput((value) => value.includes("@"));
 
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangeHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: resetPasswordInput,
+  } = useInput((value) => value.trim().length >= 6);
+
+  const {
+    value: enteredConfirmPassword,
+    isValid: enteredConfirmPasswordIsValid,
+    hasError: confirmPasswordInputHasError,
+    valueChangeHandler: confirmPasswordChangeHandler,
+    inputBlurHandler: confirmPasswordBlurHandler,
+    reset: resetConfirmPasswordInput,
+  } = useInput((value1, value2) => value1 === value2, enteredPassword);
+
   let formIsValid = false;
 
-  if (enteredNameIsValid && enteredEmailIsValid) {
+  if (
+    enteredNameIsValid &&
+    enteredEmailIsValid &&
+    enteredUserNameIsValid &&
+    enteredPasswordIsValid &&
+    enteredConfirmPasswordIsValid
+  ) {
     formIsValid = true;
   } else {
     formIsValid = false;
@@ -46,9 +79,16 @@ const RegistrationForm = (props) => {
 
     resetNameInput();
     resetEmailInput();
+    resetUserNameInput();
+    resetPasswordInput();
+    resetConfirmPasswordInput();
   };
 
   const nameInputClasses = nameInputHasError
+    ? "form-control error"
+    : "form-control";
+
+  const usernameInputClasses = userNameInputHasError
     ? "form-control error"
     : "form-control";
 
@@ -56,9 +96,16 @@ const RegistrationForm = (props) => {
     ? "form-control error"
     : "form-control";
 
+  const passwordInputClasses = passwordInputHasError
+    ? "form-control error"
+    : "form-control";
+  const confirmPasswordInputClasses = confirmPasswordInputHasError
+    ? "form-control error"
+    : "form-control";
+
   return (
     <div className="registration-form">
-      <form id="form" className="form">
+      <form id="form" className="form" onSubmit={formSubmissionHandler}>
         <h2>New User Registration</h2>
         <div className={nameInputClasses}>
           <label htmlFor="name">Name</label>
@@ -72,10 +119,17 @@ const RegistrationForm = (props) => {
           />
           {nameInputHasError && <small>Please enter valid name.</small>}
         </div>
-        <div className="form-control">
+        <div className={usernameInputClasses}>
           <label htmlFor="username">Username</label>
-          <input type="text" id="username" placeholder="Enter username" />
-          <small>Error message</small>
+          <input
+            type="text"
+            id="username"
+            onChange={userNameChangeHandler}
+            onBlur={userNameBlurHandler}
+            value={enteredUserName}
+            placeholder="Enter username"
+          />
+          {userNameInputHasError && <small>Error message</small>}
         </div>
         <div className={emailInputClasses}>
           <label htmlFor="email">Email</label>
@@ -89,21 +143,31 @@ const RegistrationForm = (props) => {
           />
           {emailInputHasError && <small>Please enter a valid email.</small>}
         </div>
-        <div className="form-control">
+        <div className={passwordInputClasses}>
           <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password" />
-          <small>Error message</small>
+          <input
+            type="password"
+            id="password"
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+            value={enteredPassword}
+            placeholder="Enter password"
+          />
+          {passwordInputHasError && <small>Password must have six characters.</small>}
         </div>
-        <div className="form-control">
+        <div className={confirmPasswordInputClasses}>
           <label htmlFor="password2">Confirm Password</label>
           <input
             type="password"
             id="password2"
+            onChange={confirmPasswordChangeHandler}
+            onBlur={confirmPasswordBlurHandler}
+            value={enteredConfirmPassword}
             placeholder="Enter password again"
           />
-          <small>Error message</small>
+          {confirmPasswordInputHasError && <small>Passwords do not match.</small>}
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={!formIsValid}>Submit</button>
       </form>
     </div>
   );
