@@ -12,6 +12,8 @@ namespace wysiwyg.Models
 
         public DbSet<Document> Documents { get; set; } = null!;
 
+        public DbSet<Version> Versions { get; set; } = null!;
+
     }
 }
 
