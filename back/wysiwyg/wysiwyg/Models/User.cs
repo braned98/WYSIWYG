@@ -9,10 +9,10 @@ namespace wysiwyg.Models
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Username { get; set; }
-		public string Password { get; set; }
-		public string Email { get; set; }
+		public string? Name { get; set; }
+		public string? Username { get; set; }
+		public string? Password { get; set; }
+		public string? Email { get; set; }
 		public ICollection<Document> Documents { get; set; } = new List<Document>();
 
 
@@ -22,6 +22,11 @@ namespace wysiwyg.Models
 			Username = username;
 			Password = password;
 			Email = email;
+		}
+
+		public User()
+		{
+
 		}
 
 	}
