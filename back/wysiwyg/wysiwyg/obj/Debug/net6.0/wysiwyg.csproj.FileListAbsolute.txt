@@ -47,3 +47,10 @@
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/wysiwyg.pdb
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/wysiwyg.genruntimeconfig.cache
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/ref/wysiwyg.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll

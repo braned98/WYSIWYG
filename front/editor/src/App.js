@@ -18,8 +18,8 @@ function App() {
   return (
     <div className='main'>
       <Navbar></Navbar>
-      {true && <RegistrationForm></RegistrationForm>}
-      {false && <LoginForm></LoginForm>}
+      {false && <RegistrationForm></RegistrationForm>}
+      {true && <LoginForm></LoginForm>}
       {false && <Editor document={document} onChange={updateDocument} />}
     </div>
   );

@@ -34,8 +34,22 @@ const LoginForm = (props) => {
   const formSubmissionHandler = (event) => {
     event.preventDefault();
 
-    resetUserNameInput();
-    resetPasswordInput();
+    const userData = {
+        'username': enteredUserName,
+        'password': enteredPassword
+    }
+
+    fetch('https://localhost:7127/login', {
+        method: 'POST',
+        headers: {"Content-type": "application/json",
+                    "Accept": "application/json",
+                    },
+        body: JSON.stringify(userData),
+    }).then(response => console.log(response))
+    .then(data => console.log(data));
+
+    //resetUserNameInput();
+    //resetPasswordInput();
   };
 
   const usernameInputClasses = userNameInputHasError

@@ -13,10 +13,14 @@ namespace wysiwyg.Controllers
 	{
 		private readonly MyWebApiContext _context;
 
-		public UserController(MyWebApiContext _context)
+        private IConfiguration _config;
+
+
+        public UserController(MyWebApiContext _context, IConfiguration config)
 		{
 
 			this._context = _context;
+			this._config = config;
 
 		}
 
@@ -36,13 +40,24 @@ namespace wysiwyg.Controllers
 		}
 
 		[HttpPost]
-		[Route("register")]
+		[Route("login")]
 		public async Task<ActionResult> userLogin([FromBody] UserDto userLogin)
 		{
+            ActionResult response = Unauthorized();
 
+			string pass = Password.HashPassword(userLogin.Password);
 
+            User user = _context.Users.FirstOrDefault(u =>
+				u.Username.Equals(userLogin.Username) && u.Password.Equals(Password.HashPassword(userLogin.Password)));
+			
+            if (user != null)
+            {
+                var tokenString = JWT.GenerateJSONWebToken(_config, user);
+                response = Ok(new { token = tokenString });
+            }
 
-			return Ok("ok");
+            return response;
+
 		}
 
 	}
