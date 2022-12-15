@@ -16,7 +16,7 @@ namespace wysiwyg.Models
 		public string Name { get; set; }
 		public DateTime DateCreated { get; set; }
 		public string LatestContent { get; set; }
-		public ICollection<Version> OldVersions { get; set; } = new List<Version>();
+		public double VersionTag { get; set; }
 
 		public Document(string name)
 		{
