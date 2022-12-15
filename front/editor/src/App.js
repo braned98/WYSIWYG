@@ -19,12 +19,26 @@ function App() {
   const [login, setLogin] = useState(false);
   const [editor, setEditor] = useState(false);
 
+  const onLoginHandler = () => {
+    setLogin(true);
+    setRegistration(false);
+    setEditor(false);
+  }
+
+  const onRegisterHandler = () => {
+    setLogin(false);
+    setRegistration(true);
+    setEditor(false);
+  }
+
+
+
   return (
     <div className='main'>
-      <Navbar></Navbar>
-      {false && <RegistrationForm></RegistrationForm>}
-      {true && <LoginForm></LoginForm>}
-      {false && <Editor document={document} onChange={updateDocument} />}
+      <Navbar onLogin={onLoginHandler} onRegister={onRegisterHandler}></Navbar>
+      {registration && <RegistrationForm></RegistrationForm>}
+      {login && <LoginForm></LoginForm>}
+      {editor && <Editor document={document} onChange={updateDocument} />}
     </div>
   );
 }

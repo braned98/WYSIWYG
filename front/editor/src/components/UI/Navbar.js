@@ -3,10 +3,24 @@ import Button from './Button';
 
 import './Navbar.css';
 
-const Navbar = () => {
+
+
+
+const Navbar = (props) => {
+
+    const loginHandler = () => {
+        props.onLogin();
+    }
+
+    const regHandler = () => {
+        props.onRegister();
+    }
+
+
+
     return <div className='navbar'>
-        <Button>Login</Button>
-        <Button>Register</Button>
+        <Button  onLoginClick={loginHandler}>Login</Button>
+        <Button onRegisterClick={regHandler}>Register</Button>
     </div>
 };
 

@@ -4,10 +4,21 @@ import React from 'react';
 import './Button.css';
 
 
-const Button = ({children}) => {
+
+const Button = (props) => {
+    const onClickHandler = () => {
+        if(props.children === 'Login'){
+            props.onLoginClick();
+        }else{
+            props.onRegisterClick();
+        }
+    
+    }
+
+
     return <div>
-        <button className="button">
-            {children}
+        <button onClick={onClickHandler} className="button">
+            {props.children}
         </button>
     </div>
 }
