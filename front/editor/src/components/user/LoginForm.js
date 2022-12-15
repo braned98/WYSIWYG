@@ -35,18 +35,25 @@ const LoginForm = (props) => {
     event.preventDefault();
 
     const userData = {
-        'username': enteredUserName,
-        'password': enteredPassword
-    }
+      username: enteredUserName,
+      password: enteredPassword,
+    };
 
-    fetch('https://localhost:7127/login', {
-        method: 'POST',
-        headers: {"Content-type": "application/json",
-                    "Accept": "application/json",
-                    },
-        body: JSON.stringify(userData),
-    }).then(response => console.log(response))
-    .then(data => console.log(data));
+
+    fetch("https://localhost:7127/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(userData),
+    })
+      .then((res) => res.json())
+      .then((res) => {console.log(res)
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('username', res.user);
+    }
+        );
 
     //resetUserNameInput();
     //resetPasswordInput();

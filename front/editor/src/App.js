@@ -15,6 +15,10 @@ function App() {
 
   const [document, updateDocument] = useState(InitialDocument);
 
+  const [registration, setRegistration] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [editor, setEditor] = useState(false);
+
   return (
     <div className='main'>
       <Navbar></Navbar>
