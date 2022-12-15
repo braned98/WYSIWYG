@@ -13,11 +13,11 @@ import InitialDocument from './utlis/InitialDocument';
 
 function App() {
 
-  const [document, updateDocument] = useState(InitialDocument);
+  const [initialDocument, updateDocument] = useState(InitialDocument);
 
   const [registration, setRegistration] = useState(false);
   const [login, setLogin] = useState(false);
-  const [editor, setEditor] = useState(false);
+  const [editor, setEditor] = useState(true);
 
   const onLoginHandler = () => {
     setLogin(true);
@@ -38,7 +38,7 @@ function App() {
       <Navbar onLogin={onLoginHandler} onRegister={onRegisterHandler}></Navbar>
       {registration && <RegistrationForm></RegistrationForm>}
       {login && <LoginForm></LoginForm>}
-      {editor && <Editor document={document} onChange={updateDocument} />}
+      {editor && <Editor initialDocument={initialDocument} onChange={updateDocument} />}
     </div>
   );
 }

@@ -1,24 +1,27 @@
 import React, { useState, useCallback } from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import './editor.css';
-import useSelection  from '../../hooks/use-selection';
+import "./editor.css";
+import useSelection from "../../hooks/use-selection";
 import Toolbar from "./Toolbar";
 import useEditorConfig from "../../hooks/use-editor-config";
 
+import { useSelector, connect } from "react-redux";
 
+function Editor({ initialDocument, onChange }) {
 
-function Editor({document, onChange}) {
+  const document = useSelector((state) => state.document);
+
   const [editor] = useState(() => withReact(createEditor()));
 
-  const {renderLeaf, KeyBindings} = useEditorConfig(editor);
+  const { renderLeaf, KeyBindings } = useEditorConfig(editor);
 
   const [selection, setSelection] = useSelection(editor);
 
   const onChangeHandler = useCallback(
     (doc) => {
-        onChange(doc);
-        setSelection(editor.selection);
+      onChange(doc);
+      setSelection(editor.selection);
     },
     [editor.selection, onChange, setSelection]
   );
