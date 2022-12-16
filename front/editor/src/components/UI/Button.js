@@ -18,6 +18,10 @@ const Button = (props) => {
       props.onDocumentClick();
     }else if(props.children === "Logout"){
         props.onLogoutClick();
+    }else if(props.children === "My Documents"){
+        props.onMyDocumentClick();
+    }else if(props.children === "New Document"){
+        props.onNewDocumentClick();
     }
   };
 

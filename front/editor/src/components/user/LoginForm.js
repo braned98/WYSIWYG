@@ -58,6 +58,7 @@ const LoginForm = (props) => {
     .then((res) => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', res.data.user);
+        localStorage.setItem('userId', res.data.userId);
         dispatch(userActions.login())
     }
     ).catch((err) => {

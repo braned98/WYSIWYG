@@ -15,6 +15,7 @@ export const login = async (userData) => {
     .then((res) => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', res.data.user);
+        localStorage.setItem('userId', res.data.userId);
     }
     ).catch((err) => {
         console.log(err);
