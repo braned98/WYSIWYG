@@ -4,7 +4,8 @@ import "./RegistrationForm.css";
 
 import useInput from "../../hooks/use-input";
 
-import axios from 'axios';
+import { login, register } from "../../services/userService";
+
 
 
 const RegistrationForm = (props) => {
@@ -87,33 +88,9 @@ const RegistrationForm = (props) => {
         'password': enteredPassword
     }
 
-    /*const formData = new FormData();
-    formData.append('Name', enteredName);
-    formData.append('Username', enteredUserName);
-    formData.append('Email', enteredEmail);
-    formData.append('Password', enteredPassword);*/
+    register(userData);
 
-    /*const headers = { 
-        'Access-Control-Allow-Origin': '*',
-        'Content-type': 'application/json',
-        'Access-Control-Allow-Headers': 'Content-Type'
-    };
-    axios.post('https://localhost:7127/register', userData, { headers })
-        .then(response => console.log(response));
-
-*/
-    console.log('test')
-    console.log(JSON.stringify(userData))
-
-    fetch('https://localhost:7127/register', {
-        method: 'POST',
-        headers: {"Content-type": "application/json",
-                    "Accept": "application/json",
-                    },
-        body: JSON.stringify(userData),
-    }).then(response => console.log(response))
-    .then(data => console.log(data));
-
+    
     //resetNameInput();
     //resetEmailInput();
     //resetUserNameInput();

@@ -1,29 +1,42 @@
-import React from 'react';
-import Button from './Button';
+import React from "react";
+import Button from "./Button";
 
-import './Navbar.css';
+import "./Navbar.css";
 
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { userActions } from "../../store/index";
 
 const Navbar = (props) => {
+  const dispatch = useDispatch();
 
-    const loginHandler = () => {
-        props.onLogin();
-    }
+  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
-    const regHandler = () => {
-        props.onRegister();
-    }
+  const loginHandler = () => {
+    props.onLogin();
+  };
 
+  const regHandler = () => {
+    props.onRegister();
+  };
 
+  const docHandler = () => {
+    props.onDocument();
+  };
 
-    return <div className='navbar'>
-        <Button  onLoginClick={loginHandler}>Login</Button>
-        <Button onRegisterClick={regHandler}>Register</Button>
+  const logoutHandler = () => {
+    props.onLogout();
+  };
+
+  return (
+    <div className="navbar">
+      {<Button onDocumentClick={docHandler}>Document</Button>}
+      {isLoggedIn && <Button onDocumentClick={docHandler}>My Documents</Button>}
+      {isLoggedIn && <Button onDocumentClick={docHandler}>New Document</Button>}
+      {!isLoggedIn && <Button onLoginClick={loginHandler}>Login</Button>}
+      {!isLoggedIn && <Button onRegisterClick={regHandler}>Register</Button>}
+      {isLoggedIn && <Button onLogoutClick={logoutHandler}>Logout</Button>}
     </div>
+  );
 };
-
-
 
 export default Navbar;

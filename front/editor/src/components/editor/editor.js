@@ -6,11 +6,14 @@ import useSelection from "../../hooks/use-selection";
 import Toolbar from "./Toolbar";
 import useEditorConfig from "../../hooks/use-editor-config";
 
-import { useSelector, connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { documentActions } from "../../store/index";
 
 function Editor({ initialDocument, onChange }) {
 
-  const document = useSelector((state) => state.document);
+  const dispatch = useDispatch();
+
+  const document = useSelector((state) => state.document.document);
 
   const [editor] = useState(() => withReact(createEditor()));
 
@@ -18,18 +21,23 @@ function Editor({ initialDocument, onChange }) {
 
   const [selection, setSelection] = useSelection(editor);
 
+  //console.log(document);
+
   const onChangeHandler = useCallback(
     (doc) => {
-      onChange(doc);
+      //onChange(doc);
+      dispatch(documentActions.update(doc))
       setSelection(editor.selection);
     },
     [editor.selection, onChange, setSelection]
   );
 
   const onKeyDown = useCallback(
-    (event) => KeyBindings.onKeyDown(editor, event),
+    (event) => KeyBindings.onKeyDown(editor, event), 
     [KeyBindings, editor]
   );
+
+
 
   return (
     <div className="editor">
