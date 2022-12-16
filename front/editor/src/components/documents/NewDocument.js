@@ -1,5 +1,6 @@
 import React from "react";
 import useInput from "../../hooks/use-input";
+import axios from 'axios';
 
 import "./NewDocument.css";
 
@@ -15,7 +16,37 @@ const NewDocument = () => {
 
   let formIsValid = false;
 
-  const formSubmissionHandler = () => {};
+  if (enteredNameIsValid) {
+    formIsValid = true;
+  } else {
+    formIsValid = false;
+  }
+
+  const formSubmissionHandler = (event) => {
+    event.preventDefault();
+
+    const documentData = {
+        name: enteredName,
+        userId: localStorage.getItem('userId')
+      };
+
+      const headers = {
+        "Content-type": "application/json",
+        "Accept": "application/json",
+    }
+
+    axios.post("https://localhost:7127/createdoc", JSON.stringify(documentData), {headers})
+    .then((res) => {
+        console.log(res)
+    }
+    ).catch((err) => {
+        console.log(err);
+    })
+
+
+
+
+  };
 
   const nameInputClasses = nameInputHasError
     ? "form-control error"
