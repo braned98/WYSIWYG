@@ -6,6 +6,7 @@
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/wysiwyg.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/wysiwyg.pdb
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Humanizer.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Abstractions.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.EntityFrameworkCore.Design.dll
@@ -20,6 +21,11 @@
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.Extensions.Logging.Abstractions.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.Extensions.Options.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.Extensions.Primitives.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.OpenApi.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Mono.TextTemplating.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Npgsql.dll
@@ -28,6 +34,7 @@
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.CodeDom.dll
+/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.Text.Encodings.Web.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.Text.Json.dll
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/runtimes/browser/lib/net6.0/System.Text.Encodings.Web.dll
@@ -47,10 +54,3 @@
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/wysiwyg.pdb
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/wysiwyg.genruntimeconfig.cache
 /Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/obj/Debug/net6.0/ref/wysiwyg.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
-/Users/brane/Desktop/WYSIWYG/back/wysiwyg/wysiwyg/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll

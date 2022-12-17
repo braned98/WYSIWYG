@@ -12,8 +12,8 @@ using wysiwyg.Models;
 namespace wysiwyg.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20221216143843_seven")]
-    partial class seven
+    [Migration("20221217144621_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

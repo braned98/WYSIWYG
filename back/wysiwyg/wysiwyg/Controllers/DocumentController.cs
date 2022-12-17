@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using wysiwyg.Dto;
 using wysiwyg.Models;
 using wysiwyg.Tools;
+using Microsoft.EntityFrameworkCore;
 
 namespace wysiwyg.Controllers
 {
@@ -30,6 +31,15 @@ namespace wysiwyg.Controllers
             _context.SaveChanges();
 
             return Ok("ok");
+        }
+
+        [HttpGet]
+        [Route("getDocuments")]
+        public IEnumerable<Document> getDocuments(int id)
+        {
+            var documents = _context.Documents.Where(doc => doc.UserId == id);
+
+            return documents;
         }
 
 
