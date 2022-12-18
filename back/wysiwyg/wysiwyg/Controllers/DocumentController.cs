@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace wysiwyg.Controllers
 {
+    
 	public class DocumentController : ControllerBase
 	{
 
