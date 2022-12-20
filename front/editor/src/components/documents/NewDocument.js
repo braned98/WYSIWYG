@@ -1,10 +1,14 @@
 import React from "react";
 import useInput from "../../hooks/use-input";
-import axios from 'axios';
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { routerActions } from "../../store";
 
 import "./NewDocument.css";
 
 const NewDocument = () => {
+  const dispatch = useDispatch();
+
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -26,26 +30,26 @@ const NewDocument = () => {
     event.preventDefault();
 
     const documentData = {
-        name: enteredName,
-        userId: localStorage.getItem('userId')
-      };
+      name: enteredName,
+      userId: localStorage.getItem("userId"),
+    };
 
-      const headers = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-    }
+    const headers = {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    };
 
-    axios.post("https://localhost:7127/createdoc", JSON.stringify(documentData), {headers})
-    .then((res) => {
-        console.log(res)
-    }
-    ).catch((err) => {
+    axios
+      .post("https://localhost:7127/createdoc", JSON.stringify(documentData), {
+        headers,
+      })
+      .then((res) => {
+        console.log(res);
+        dispatch(routerActions.updateRoute("My Documents"));
+      })
+      .catch((err) => {
         console.log(err);
-    })
-
-
-
-
+      });
   };
 
   const nameInputClasses = nameInputHasError

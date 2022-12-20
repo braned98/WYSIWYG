@@ -8,6 +8,19 @@ const initialState = {document: [
   },
 ]};
 
+const routerState = {route: localStorage.getItem('router') || 'Login'};
+
+const routerSlice = createSlice({
+    name: 'router',
+    initialState: routerState,
+    reducers: {
+        updateRoute(state, action){
+            state.route = action.payload;
+            localStorage.setItem('router', action.payload);
+        }
+    }
+});
+
 const documentSlice = createSlice({
     name: 'document',
     initialState: initialState,
@@ -33,10 +46,11 @@ const userSlice = createSlice ({
 
 
 const store = configureStore({
-    reducer: { document: documentSlice.reducer, user: userSlice.reducer }
+    reducer: { document: documentSlice.reducer, user: userSlice.reducer, router: routerSlice.reducer }
 });
 
 export const documentActions = documentSlice.actions;
 export const userActions = userSlice.actions;
+export const routerActions = routerSlice.actions;
 
 export default store;

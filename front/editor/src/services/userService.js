@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export const logout = () => {
-    localStorage.clear();
+    localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('token');
 }
 
 export const login = async (userData) => {

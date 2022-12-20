@@ -5,7 +5,7 @@ import "./Login.css";
 import useInput from "../../hooks/use-input";
 import { login } from "../../services/userService";
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/index";
+import { userActions, routerActions } from "../../store/index";
 import axios from 'axios';
 
 
@@ -59,7 +59,10 @@ const LoginForm = (props) => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', res.data.user);
         localStorage.setItem('userId', res.data.userId);
-        dispatch(userActions.login())
+        localStorage.setItem('router', "My Documents");
+        dispatch(routerActions.updateRoute('My Documents'));
+        dispatch(userActions.login());
+        
     }
     ).catch((err) => {
         console.log(err);
