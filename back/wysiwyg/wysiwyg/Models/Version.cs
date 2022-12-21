@@ -11,6 +11,9 @@ namespace wysiwyg.Models
         public int Id { get; set; }
 		public double VersionTag { get; set; }
 		public string Content { get; set; }
+		[ForeignKey("DocumentId")]
+		public int DocumentId { get; set; }
+		public Document? Document { get; set; }
 
 		public Version(string content)
 		{
