@@ -43,6 +43,15 @@ namespace wysiwyg.Controllers
             return documents;
         }
 
+        [HttpGet]
+        [Route("getDocument")]
+        public Document getDocument(int id)
+        {
+            var document = _context.Documents.FirstOrDefault(doc => doc.Id == id);
+
+            return document;
+        }
+
 
     }
 }

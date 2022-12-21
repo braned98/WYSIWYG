@@ -20,7 +20,7 @@ namespace wysiwyg.Models
 		public Document(string name, int userId)
 		{
 			Name = name;
-			LatestContent = "You can start writing!";
+			LatestContent = "";
 			DateCreated = DateTime.UtcNow;
 			UserId = userId;
 			VersionTag = 0.1;

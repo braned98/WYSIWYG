@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import "./editor.css";
@@ -8,6 +8,8 @@ import useEditorConfig from "../../hooks/use-editor-config";
 
 import { useSelector, useDispatch } from "react-redux";
 import { documentActions } from "../../store/index";
+import axios from 'axios';
+import InitialDocument from "../../utlis/InitialDocument";
 
 function Editor({ initialDocument, onChange }) {
 
@@ -23,10 +25,27 @@ function Editor({ initialDocument, onChange }) {
 
   //console.log(document);
 
+//u slucaju refresha, update redux store - sadrzaj se vraca ako je korisnik odradio save
+  useEffect(() => {
+    axios
+    .get("https://localhost:7127/getDocument?id=" + `${localStorage.getItem('currentDocument')}`)
+    .then((response) => {
+      console.log(response.data);
+      if(response.data.latestContent === ""){
+          dispatch(documentActions.updateContent(InitialDocument))
+      }else{
+          dispatch(documentActions.updateContent(response.data.latestContent));
+      }
+      dispatch(documentActions.setId(response.data.id));
+      dispatch(documentActions.updateStatus());
+    }, []);
+
+  })
+
   const onChangeHandler = useCallback(
     (doc) => {
       //onChange(doc);
-      dispatch(documentActions.update(doc))
+      dispatch(documentActions.updateContent(doc))
       setSelection(editor.selection);
     },
     [editor.selection, onChange, setSelection]
