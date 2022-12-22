@@ -22,7 +22,7 @@ const MyDocuments = () => {
       <div className="documents-list">
         <h1>My Documents</h1>
         {documents.map((document) => (
-          <Document key={document.id} id={document.id} name={document.name} />
+          <Document key={document.id} id={document.id} name={document.name} content = {document.latestContent} />
         ))}
       </div>
     </div>

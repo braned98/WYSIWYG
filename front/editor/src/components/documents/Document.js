@@ -9,19 +9,10 @@ const Document = (props) => {
     const dispatch = useDispatch();
 
   const openDocumentHandler = () => {
-    axios
-      .get("https://localhost:7127/getDocument?id=" + `${props.id}`)
-      .then((response) => {
-        console.log(response.data);
-        localStorage.setItem('currentDocument', props.id);
-        if(response.data.latestContent === ""){
-            dispatch(documentActions.updateContent(InitialDocument))
-        }else{
-            dispatch(documentActions.updateContent(response.data.latestContent));
-        }
-        dispatch(documentActions.setId(response.data.id));
-        dispatch(documentActions.updateStatus());
-      });
+    localStorage.setItem('currentDocument', props.id);
+    localStorage.setItem('docContent', props.content);
+    dispatch(routerActions.updateRoute('Document'));
+    //dispatch(documentActions.updateContent(props.content));
   };
 
   return (

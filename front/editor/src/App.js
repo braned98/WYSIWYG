@@ -11,15 +11,15 @@ import { useEffect, useState } from "react";
 
 import InitialDocument from "./utlis/InitialDocument";
 import { useDispatch, useSelector } from "react-redux";
-import { userActions, routerActions } from "./store/index"
+import { userActions, routerActions, documentActions } from "./store/index";
 import NewDocument from "./components/documents/NewDocument";
+import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();
 
   const route = useSelector((state) => state.router.route);
 
-  
   const [initialDocument, updateDocument] = useState(InitialDocument);
 
   const [registration, setRegistration] = useState(false);
@@ -29,30 +29,32 @@ function App() {
   const [myDocuments, setMyDocuments] = useState(false);
 
   useEffect(() => {
+    
 
-    console.log('Render ' + route);
+    console.log("Render " + route);
 
-    switch(route){
-      case 'Login':
+    switch (route) {
+      case "Login":
         onLoginHandler();
         break;
-      case 'Register':
+      case "Register":
         onRegisterHandler();
         break;
-      case 'My Documents':
+      case "My Documents":
         onMyDocumentsHandler();
         break;
-      case 'New Document':
+      case "New Document":
         onNewDocumentHandler();
         break;
-      case 'Document':
+      case "Document":
         onDocumentHandler();
         break;
       default:
         onLoginHandler();
-
     }
-  })
+  });
+
+  
 
   const onLoginHandler = () => {
     setLogin(true);
@@ -60,8 +62,7 @@ function App() {
     setEditor(false);
     setNewDocument(false);
     setMyDocuments(false);
-    dispatch(routerActions.updateRoute('Login'));
-
+    dispatch(routerActions.updateRoute("Login"));
   };
 
   const onRegisterHandler = () => {
@@ -70,8 +71,7 @@ function App() {
     setEditor(false);
     setNewDocument(false);
     setMyDocuments(false);
-    dispatch(routerActions.updateRoute('Register'));
-
+    dispatch(routerActions.updateRoute("Register"));
   };
 
   const onDocumentHandler = () => {
@@ -80,8 +80,7 @@ function App() {
     setEditor(true);
     setNewDocument(false);
     setMyDocuments(false);
-    dispatch(routerActions.updateRoute('Document'));
-
+    dispatch(routerActions.updateRoute("Document"));
   };
 
   const onLogoutHandler = () => {
@@ -92,11 +91,8 @@ function App() {
     setEditor(false);
     setNewDocument(false);
     setMyDocuments(false);
-    dispatch(routerActions.updateRoute('Login'));
-
+    dispatch(routerActions.updateRoute("Login"));
   };
-
- 
 
   const onNewDocumentHandler = () => {
     setLogin(false);
@@ -104,18 +100,17 @@ function App() {
     setEditor(false);
     setNewDocument(true);
     setMyDocuments(false);
-    dispatch(routerActions.updateRoute('New Document'));
+    dispatch(routerActions.updateRoute("New Document"));
   };
 
   const onMyDocumentsHandler = () => {
-    console.log('pozvan')
+    console.log("pozvan");
     setLogin(false);
     setRegistration(false);
     setEditor(false);
     setNewDocument(false);
     setMyDocuments(true);
-    dispatch(routerActions.updateRoute('My Documents'));
-
+    dispatch(routerActions.updateRoute("My Documents"));
   };
 
   return (
@@ -130,7 +125,9 @@ function App() {
       ></Navbar>
       {registration && <RegistrationForm></RegistrationForm>}
       {login && <LoginForm></LoginForm>}
-      {editor && <Editor initialDocument={initialDocument} onChange={updateDocument} />}
+      {editor && (
+        <Editor initialDocument={initialDocument} onChange={updateDocument} />
+      )}
       {myDocuments && <MyDocuments></MyDocuments>}
       {newDocument && <NewDocument></NewDocument>}
     </div>

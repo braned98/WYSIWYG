@@ -52,6 +52,24 @@ namespace wysiwyg.Controllers
             return document;
         }
 
+        [HttpPut]
+        [Route("saveDocument")]
+        public Document saveDocument([FromBody] DocumentDto doc)
+        {
+            var document = _context.Documents.FirstOrDefault(document => document.Id == doc.Id);
+
+            Models.Version saveLastVersion = new Models.Version(document.LatestContent, document.Id, document.VersionTag);
+
+            document.LatestContent = doc.DocumentContent;
+            document.VersionTag += 0.1;
+
+            _context.Versions.Add(saveLastVersion);
+
+            _context.SaveChanges();
+
+            return document;
+        }
+
 
     }
 }
