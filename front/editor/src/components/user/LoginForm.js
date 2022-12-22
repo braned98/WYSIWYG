@@ -3,8 +3,18 @@ import React from "react";
 import "./Login.css";
 
 import useInput from "../../hooks/use-input";
+import { login } from "../../services/userService";
+import { useSelector, useDispatch } from "react-redux";
+import { userActions, routerActions } from "../../store/index";
+import axios from 'axios';
+
+
 
 const LoginForm = (props) => {
+  const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user.user);
+
   const {
     value: enteredUserName,
     isValid: enteredUserNameIsValid,
@@ -39,21 +49,24 @@ const LoginForm = (props) => {
       password: enteredPassword,
     };
 
-
-    fetch("https://localhost:7127/login", {
-      method: "POST",
-      headers: {
+    const headers = {
         "Content-type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((res) => res.json())
-      .then((res) => {console.log(res)
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('username', res.user);
+        "Accept": "application/json",
     }
-        );
+
+    axios.post("https://localhost:7127/login", JSON.stringify(userData), {headers})
+    .then((res) => {
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', res.data.user);
+        localStorage.setItem('userId', res.data.userId);
+        localStorage.setItem('router', "My Documents");
+        dispatch(routerActions.updateRoute('My Documents'));
+        dispatch(userActions.login());
+        
+    }
+    ).catch((err) => {
+        console.log(err);
+    })
 
     //resetUserNameInput();
     //resetPasswordInput();

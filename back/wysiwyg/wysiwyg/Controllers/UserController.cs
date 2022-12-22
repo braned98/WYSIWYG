@@ -53,7 +53,7 @@ namespace wysiwyg.Controllers
             if (user != null)
             {
                 var tokenString = JWT.GenerateJSONWebToken(_config, user);
-                response = Ok(new { token = tokenString, user = user.Username });
+                response = Ok(new { token = tokenString, user = user.Username, userId = user.Id });
             }
 
             return response;

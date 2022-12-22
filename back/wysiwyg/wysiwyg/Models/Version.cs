@@ -15,9 +15,11 @@ namespace wysiwyg.Models
 		public int DocumentId { get; set; }
 		public Document? Document { get; set; }
 
-		public Version(string content)
+		public Version(string content, int id, double versionTag)
 		{
 			Content = content;
+			DocumentId = id;
+			VersionTag = versionTag;
 		}
 	}
 }

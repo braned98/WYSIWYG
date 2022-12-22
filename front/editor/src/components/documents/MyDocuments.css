@@ -1,0 +1,10 @@
+.documents-list{
+    display: inline-block;
+    justify-content: center;
+    padding-top: 15%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}

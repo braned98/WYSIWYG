@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace wysiwyg.Migrations
 {
     /// <inheritdoc />
-    public partial class second : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -18,10 +18,10 @@ namespace wysiwyg.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    Username = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false),
-                    Email = table.Column<string>(type: "text", nullable: false)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    Username = table.Column<string>(type: "text", nullable: true),
+                    Password = table.Column<string>(type: "text", nullable: true),
+                    Email = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -37,7 +37,8 @@ namespace wysiwyg.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    LatestContent = table.Column<string>(type: "text", nullable: false)
+                    LatestContent = table.Column<string>(type: "text", nullable: false),
+                    VersionTag = table.Column<double>(type: "double precision", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -51,22 +52,24 @@ namespace wysiwyg.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Version",
+                name: "Versions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    VersionTag = table.Column<double>(type: "double precision", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false),
-                    DocumentId = table.Column<int>(type: "integer", nullable: true)
+                    DocumentId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Version", x => x.Id);
+                    table.PrimaryKey("PK_Versions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Version_Documents_DocumentId",
+                        name: "FK_Versions_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -75,8 +78,8 @@ namespace wysiwyg.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Version_DocumentId",
-                table: "Version",
+                name: "IX_Versions_DocumentId",
+                table: "Versions",
                 column: "DocumentId");
         }
 
@@ -84,7 +87,7 @@ namespace wysiwyg.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Version");
+                name: "Versions");
 
             migrationBuilder.DropTable(
                 name: "Documents");

@@ -4,8 +4,9 @@ import { FaBold, FaItalic, FaUnderline, FaSave } from "react-icons/fa";
 
 
 import "./Toolbar.css";
+import SaveButton from "../UI/SaveButton";
 
-const CHARACTER_STYLES = ["bold", "italic", "underline", "save"];
+const CHARACTER_STYLES = ["bold", "italic", "underline"];
 
 const Toolbar = (props) => {
 
@@ -18,6 +19,7 @@ const Toolbar = (props) => {
           icon={getIconForButton(style)}          
         ></ToolbarButton>
       ))}
+      <SaveButton style="save" icon={getIconForButton("save")}></SaveButton>
     </div>
   );
 };
