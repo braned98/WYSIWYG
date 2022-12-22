@@ -28,10 +28,12 @@
     <None Remove="Tools\" />
     <None Remove="Dto\" />
     <None Remove="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Tools\" />
     <Folder Include="Dto\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 </Project>

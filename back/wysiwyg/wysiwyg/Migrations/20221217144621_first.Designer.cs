@@ -12,15 +12,15 @@ using wysiwyg.Models;
 namespace wysiwyg.Migrations
 {
     [DbContext(typeof(MyWebApiContext))]
-    [Migration("20221213104538_third")]
-    partial class third
+    [Migration("20221217144621_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "7.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -47,6 +47,9 @@ namespace wysiwyg.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<double>("VersionTag")
+                        .HasColumnType("double precision");
+
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
@@ -63,19 +66,15 @@ namespace wysiwyg.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Username")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -95,37 +94,37 @@ namespace wysiwyg.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("DocumentId")
+                    b.Property<int>("DocumentId")
                         .HasColumnType("integer");
+
+                    b.Property<double>("VersionTag")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DocumentId");
 
-                    b.ToTable("Version");
+                    b.ToTable("Versions");
                 });
 
             modelBuilder.Entity("wysiwyg.Models.Document", b =>
                 {
-                    b.HasOne("wysiwyg.Models.User", "User")
+                    b.HasOne("wysiwyg.Models.User", null)
                         .WithMany("Documents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("wysiwyg.Models.Version", b =>
                 {
-                    b.HasOne("wysiwyg.Models.Document", null)
-                        .WithMany("OldVersions")
-                        .HasForeignKey("DocumentId");
-                });
+                    b.HasOne("wysiwyg.Models.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("wysiwyg.Models.Document", b =>
-                {
-                    b.Navigation("OldVersions");
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("wysiwyg.Models.User", b =>

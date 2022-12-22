@@ -106,13 +106,11 @@ namespace wysiwyg.Migrations
 
             modelBuilder.Entity("wysiwyg.Models.Document", b =>
                 {
-                    b.HasOne("wysiwyg.Models.User", "User")
+                    b.HasOne("wysiwyg.Models.User", null)
                         .WithMany("Documents")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("wysiwyg.Models.Version", b =>
