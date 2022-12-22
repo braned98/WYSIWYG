@@ -6,17 +6,22 @@ import { useEffect } from "react";
 import "./Navbar.css";
 
 import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/index";
+import { userActions, documentActions } from "../../store/index";
 
 const Navbar = (props) => {
-    
+
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
+  const isDocumentOpened = useSelector((state) => state.document.document);
+
 
   useEffect(() => {
     if (localStorage.getItem("token") != null) {
       dispatch(userActions.login());
+    }
+    if(localStorage.getItem("currentDocument") != null){
+        dispatch(documentActions.setId(localStorage.getItem("currentDocument")))
     }
   });
 
@@ -46,7 +51,7 @@ const Navbar = (props) => {
 
   return (
     <div className="navbar">
-      {<Button onDocumentClick={docHandler}>Document</Button>}
+      {isDocumentOpened && <Button onDocumentClick={docHandler}>Document</Button>}
       {isLoggedIn && (
         <Button onMyDocumentClick={docMyHandler}>My Documents</Button>
       )}

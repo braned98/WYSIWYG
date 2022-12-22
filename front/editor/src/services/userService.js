@@ -4,6 +4,8 @@ export const logout = () => {
     localStorage.removeItem('username');
     localStorage.removeItem('userId');
     localStorage.removeItem('token');
+    localStorage.removeItem('docContent');
+    localStorage.removeItem('currentDocument');
 }
 
 export const login = async (userData) => {

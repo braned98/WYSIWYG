@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useDispatch} from "react-redux";
-import { documentActions, routerActions } from "../../store";
+import { routerActions } from "../../store";
 import "./Document.css";
-import InitialDocument from "../../utlis/InitialDocument";
 
 const Document = (props) => {
     const dispatch = useDispatch();
@@ -12,7 +11,6 @@ const Document = (props) => {
     localStorage.setItem('currentDocument', props.id);
     localStorage.setItem('docContent', props.content);
     dispatch(routerActions.updateRoute('Document'));
-    //dispatch(documentActions.updateContent(props.content));
   };
 
   return (

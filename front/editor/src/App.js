@@ -29,8 +29,7 @@ function App() {
   const [myDocuments, setMyDocuments] = useState(false);
 
   useEffect(() => {
-    
-
+  
     console.log("Render " + route);
 
     switch (route) {
@@ -86,6 +85,7 @@ function App() {
   const onLogoutHandler = () => {
     logout();
     dispatch(userActions.logout());
+    dispatch(documentActions.setId(null))
     setLogin(true);
     setRegistration(false);
     setEditor(false);

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import "./editor.css";
@@ -6,15 +6,10 @@ import useSelection from "../../hooks/use-selection";
 import Toolbar from "./Toolbar";
 import useEditorConfig from "../../hooks/use-editor-config";
 
-import { useSelector, useDispatch } from "react-redux";
-import { documentActions } from "../../store/index";
-import axios from "axios";
-import InitialDocument from "../../utlis/InitialDocument";
+
 
 function Editor({ initialDocument, onChange }) {
-  const dispatch = useDispatch();
 
-  //const document = useSelector((state) => state.document.document);
 
   const [editor] = useState(() => withReact(createEditor()));
 
@@ -47,7 +42,6 @@ function Editor({ initialDocument, onChange }) {
   const onChangeHandler = useCallback(
     (doc) => {
       onChange(doc);
-      dispatch(documentActions.updateContent(doc));
       localStorage.setItem("docContent", JSON.stringify(doc));
       setSelection(editor.selection);
     },

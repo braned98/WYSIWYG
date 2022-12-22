@@ -1,20 +1,9 @@
 import { createStore } from "redux";
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-
-
 const initialState = {
-  document: [
-    {
-      type: "paragraph",
-      children: [{ text: "" }],
-    },
-  ],
-  documentId: 0,
-  isOpened: false
+  document: localStorage.getItem("currentDocument"),
 };
-
-
 
 const routerState = { route: localStorage.getItem("router") || "Login" };
 
@@ -33,15 +22,9 @@ const documentSlice = createSlice({
   name: "document",
   initialState: initialState,
   reducers: {
-    updateContent(state, action) {
+    setId(state, action) {
       state.document = action.payload;
     },
-    updateStatus(state){
-        state.isOpened = true;
-    },
-    setId(state, action){
-        state.documentId = action.payload;
-    }
   },
 });
 
