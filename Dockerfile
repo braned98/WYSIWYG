@@ -11,7 +11,8 @@ RUN dotnet publish -c Release -o out
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 WORKDIR /App
-ENV DOTNET_URLS=http://+:5000
-ENV ASPNETCORE_URLS=http://+:5000
+ENV DOTNET_URLS=http://+:7127+
+ENV ASPNETCORE_URLS=http://+:7127
+ENV ASPNETCORE_Kestrel__Certificates__Default__Password="password"
 COPY --from=build-env /App/out .
 ENTRYPOINT ["dotnet", "wysiwyg.dll"]
