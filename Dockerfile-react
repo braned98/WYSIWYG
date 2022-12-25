@@ -1,0 +1,18 @@
+FROM node:alpine
+ 
+WORKDIR /app
+# install app dependencies
+COPY front/editor/package.json /app
+ 
+#RUN rm node_modules
+ 
+# add app
+COPY front/editor/ /app
+RUN rm -rf node_modules
+
+
+RUN npm install
+ 
+# start app
+CMD ["npm", "start"]
+#CMD ["ls"]

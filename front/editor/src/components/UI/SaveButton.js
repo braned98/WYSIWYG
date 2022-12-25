@@ -16,7 +16,7 @@ const saveHandler = (docContent, id) => {
       };
   
       axios
-        .put("https://localhost:7127/saveDocument", JSON.stringify(documentData), {
+        .put("http://localhost:7127/saveDocument", JSON.stringify(documentData), {
           headers,
         })
         .then((res) => {

@@ -13,7 +13,6 @@ import InitialDocument from "./utlis/InitialDocument";
 import { useDispatch, useSelector } from "react-redux";
 import { userActions, routerActions, documentActions } from "./store/index";
 import NewDocument from "./components/documents/NewDocument";
-import axios from "axios";
 
 function App() {
   const dispatch = useDispatch();
