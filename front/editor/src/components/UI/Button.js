@@ -1,13 +1,9 @@
 import React from "react";
 
 import "./Button.css";
-import { useSelector, useDispatch } from "react-redux";
-import { userActions } from "../../store/index";
 
 const Button = (props) => {
-  const dispatch = useDispatch();
 
-  const isLoggedIn = useSelector((state) => state.user.isLoggedIn);
 
   const onClickHandler = () => {
     if (props.children === "Login") {

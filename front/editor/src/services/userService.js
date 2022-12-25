@@ -15,7 +15,7 @@ export const login = async (userData) => {
         "Accept": "application/json",
     }
 
-    axios.post("https://localhost:7127/login", JSON.stringify(userData), {headers})
+    axios.post("http://localhost:7127/login", JSON.stringify(userData), {headers})
     .then((res) => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', res.data.user);
@@ -35,7 +35,7 @@ export const register = (userData) => {
         "Content-type": "application/json",
         "Accept": "application/json",
     };
-    axios.post('https://localhost:7127/register', userData, { headers })
+    axios.post('http://localhost:7127/register', userData, { headers })
     .then(response => console.log(response))
     .then(data => console.log(data));
 

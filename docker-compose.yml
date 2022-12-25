@@ -1,0 +1,64 @@
+
+
+networks:
+  dockerapi-dev:
+    driver: bridge
+
+services:
+  dockerapi:
+    image: dockerapi:latest
+    depends_on:
+      - "postgres_image"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7127:7127"
+    environment:
+      CONNECTIONSTRINGS__DEFAULT: "User ID =postgres;Password=root;Server=localhost;Port=5432;Database=wysiwyg;Integrated Security=true;Pooling=true;"
+    networks:
+      - dockerapi-dev
+  
+  postgres_image:
+    image: postgres:latest
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data 
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "root"
+      POSTGRES_DB: "wysiwyg"
+    networks:
+      - dockerapi-dev
+
+
+  #nginx:
+  #  image: nginx:alpine
+  #  volumes: 
+  #    - ./config/nginx.conf:/etc/nginx/nginx.conf:ro
+  #    - ./config/certs:/etc/nginx/certs
+  #  depends_on:
+  #   - dockerapi
+  #  ports:
+  #    - "7127:7127"
+  #  networks:
+  #   - dockerapi-dev
+
+  client:
+    stdin_open: true
+    build:
+     context: .
+     dockerfile: Dockerfile-react
+    ports:
+     - "3000:3000"
+    volumes:
+     - "./front/editor/:/app"
+    networks:
+     - dockerapi-dev
+
+
+
+volumes:
+  db_volume:

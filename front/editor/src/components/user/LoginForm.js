@@ -54,7 +54,7 @@ const LoginForm = (props) => {
         "Accept": "application/json",
     }
 
-    axios.post("https://localhost:7127/login", JSON.stringify(userData), {headers})
+    axios.post("http://localhost:7127/login", JSON.stringify(userData), {headers})
     .then((res) => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', res.data.user);

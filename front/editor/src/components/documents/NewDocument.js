@@ -40,7 +40,7 @@ const NewDocument = () => {
     };
 
     axios
-      .post("https://localhost:7127/createdoc", JSON.stringify(documentData), {
+      .post("http://localhost:7127/createdoc", JSON.stringify(documentData), {
         headers,
       })
       .then((res) => {
