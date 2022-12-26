@@ -1,7 +1,8 @@
-from flask import Flask, request, make_response
+from flask import Flask, request, make_response, Response
 from flask_cors import CORS
 import json
 from handler import document_to_pdf
+from aiohttp import web
 
 app = Flask(__name__)
 CORS(app)
@@ -9,9 +10,9 @@ CORS(app)
 @app.route("/export", methods=['POST'])
 
 def export():
-    response = make_response()
-    response.headers.add("Access-Control-Allow-Origin", "*")
-    response.content_type = "application/json"
+    #response = make_response()
+    #response.headers.add("Access-Control-Allow-Origin", "*")
+    #response.content_type = "application/json"
 
     data = request.get_data()
 
@@ -21,7 +22,11 @@ def export():
 
     pdf_doc = document_to_pdf(json_string)
 
-    return response;
+    #response = Response(pdf_doc)
+
+    return Response(pdf_doc, mimetype="application/pdf")
+    #return "sfsfsdf"
+    #return web.Response(body=pdf_doc)
 
 
 if __name__ == '__main__':
