@@ -37,6 +37,7 @@ def document_to_pdf(data):
                     print(html)
                 else:
                     html += '<br>'
+            html += '<br>'
 
 
     #pdfkit.from_string(html, 'test.pdf');

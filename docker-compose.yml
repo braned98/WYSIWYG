@@ -58,6 +58,16 @@ services:
     networks:
      - dockerapi-dev
 
+  exporter:
+    build:
+      context: .
+      dockerfile: Dockerfile-flask
+    ports:
+      - '5001:5001'
+    networks:
+      - dockerapi-dev
+
+
 
 
 volumes:

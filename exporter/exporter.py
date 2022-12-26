@@ -2,7 +2,6 @@ from flask import Flask, request, make_response, Response
 from flask_cors import CORS
 import json
 from handler import document_to_pdf
-from aiohttp import web
 
 app = Flask(__name__)
 CORS(app)
@@ -30,4 +29,4 @@ def export():
 
 
 if __name__ == '__main__':
-    app.run(host='localhost', port=5001)
+    app.run(host='0.0.0.0', port=5001)
