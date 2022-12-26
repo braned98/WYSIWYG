@@ -1,0 +1,12 @@
+FROM python:3.9.10
+WORKDIR /srv
+
+RUN apt update && apt upgrade -y && apt install wkhtmltopdf -y
+
+RUN pip install flask
+RUN pip install flask_cors
+RUN pip install pdfkit
+
+COPY exporter/ /srv
+ENV FLASK_APP=app
+CMD ["python","exporter.py"]
