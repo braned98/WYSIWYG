@@ -6,6 +6,7 @@ using wysiwyg.Models;
 using wysiwyg.Tools;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace wysiwyg.Controllers
 {
     
@@ -61,13 +62,26 @@ namespace wysiwyg.Controllers
             Models.Version saveLastVersion = new Models.Version(document.LatestContent, document.Id, document.VersionTag);
 
             document.LatestContent = doc.DocumentContent;
-            document.VersionTag += 0.1;
+            document.VersionTag = Math.Round(document.VersionTag + 0.1, 1);
 
             _context.Versions.Add(saveLastVersion);
 
             _context.SaveChanges();
 
             return document;
+        }
+
+        [HttpGet]
+        [Route("getVersion")]
+        public VersionDTO getVersion([FromBody] VersionDTO ver)
+        {
+            VersionDTO retVal = new VersionDTO();
+
+            var version = _context.Versions.FirstOrDefault(version => (version.DocumentId == ver.Id && version.VersionTag == ver.VersionTag));
+
+            retVal.DocumentContent = version.Content;
+
+            return retVal;
         }
 
 

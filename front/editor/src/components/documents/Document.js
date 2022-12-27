@@ -10,6 +10,7 @@ const Document = (props) => {
   const openDocumentHandler = () => {
     localStorage.setItem('currentDocument', props.id);
     localStorage.setItem('docContent', props.content);
+    localStorage.setItem('currentVersion', props.version);
     dispatch(routerActions.updateRoute('Document'));
   };
 

@@ -29,7 +29,6 @@ const exportHandler = (document) => {
       a.click();
       a.remove();
       setTimeout(() => window.URL.revokeObjectURL(url), 100);
-      
     });
 };
 
