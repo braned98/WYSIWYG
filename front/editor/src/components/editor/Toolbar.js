@@ -1,4 +1,4 @@
-import React, { version, useMemo } from "react";
+import React, { version, useMemo, useState } from "react";
 import ToolbarButton from "../UI/ToolbarButton";
 import {
   FaBold,
@@ -15,24 +15,30 @@ import "./Toolbar.css";
 import SaveButton from "../UI/SaveButton";
 import PdfButton from "../UI/PdfButton";
 
-import axios from 'axios';
+import axios from "axios";
+
+import { useDispatch} from "react-redux";
+import { routerActions } from "../../store";
 
 const CHARACTER_STYLES = ["bold", "italic", "underline"];
 
 const Toolbar = (props) => {
   const versions = [];
 
+  const dispatch = useDispatch();
+
+
   const currentVersion = useMemo(() => {
     if (localStorage.getItem("currentVersion")) {
       for (
-        let i = localStorage.getItem("currentVersion");
+        let i = localStorage.getItem("maxVersion");
         i > 0.0;
         i = (i - 0.1).toFixed(1)
       ) {
         const obj = {
-            value: i,
-            label: `v${i.toString()}`
-        }
+          value: i,
+          label: `v${i.toString()}`,
+        };
         versions.push(obj);
       }
 
@@ -48,8 +54,34 @@ const Toolbar = (props) => {
   const changeHandler = (prop) => {
     localStorage.setItem("currentVersion", prop.value);
 
-    
+    console.log(prop.value);
 
+    const documentData = {
+      id: localStorage.getItem("currentDocument"),
+      versionTag: prop.value,
+    };
+
+    console.log(documentData);
+
+    const headers = {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    };
+
+    axios
+      .post("http://localhost:7127/getVersion", JSON.stringify(documentData), {
+        headers,
+      })
+      .then((res) => {
+        console.log(res.data.documentContent);
+        localStorage.setItem("docContent", res.data.documentContent);
+        console.log(localStorage.getItem("docContent"))
+        dispatch(routerActions.updateRoute('Document'));
+
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (

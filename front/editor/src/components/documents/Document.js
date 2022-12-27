@@ -11,6 +11,7 @@ const Document = (props) => {
     localStorage.setItem('currentDocument', props.id);
     localStorage.setItem('docContent', props.content);
     localStorage.setItem('currentVersion', props.version);
+    localStorage.setItem('maxVersion', props.version)
     dispatch(routerActions.updateRoute('Document'));
   };
 

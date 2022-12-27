@@ -21,6 +21,7 @@ const saveHandler = (docContent, id) => {
         })
         .then((res) => {
           console.log(res);
+          localStorage.setItem('maxVersion', res.data.versionTag)
         })
         .catch((err) => {
           console.log(err);

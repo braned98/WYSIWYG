@@ -71,7 +71,7 @@ namespace wysiwyg.Controllers
             return document;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("getVersion")]
         public VersionDTO getVersion([FromBody] VersionDTO ver)
         {
