@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./Login.css";
 
@@ -11,6 +11,8 @@ import axios from 'axios';
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
+
+  const [loginFailed, setLoginFailed] = useState(false);
 
   const {
     value: enteredUserName,
@@ -29,6 +31,7 @@ const LoginForm = (props) => {
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
   } = useInput((value) => value.trim().length >= 6);
+
 
   let formIsValid = false;
 
@@ -63,19 +66,25 @@ const LoginForm = (props) => {
     }
     ).catch((err) => {
         console.log(err);
-    })
+        setLoginFailed(true);
+        })
 
     resetUserNameInput();
     resetPasswordInput();
   };
 
-  const usernameInputClasses = userNameInputHasError
+  let usernameInputClasses = userNameInputHasError
     ? "form-control error"
     : "form-control";
 
-  const passwordInputClasses = passwordInputHasError
+  let passwordInputClasses = passwordInputHasError
     ? "form-control error"
     : "form-control";
+
+    if(loginFailed){
+        usernameInputClasses = "form-control error"
+        passwordInputClasses = "form-control error"
+    }
 
   return (
     <div className="login-container">
@@ -92,7 +101,7 @@ const LoginForm = (props) => {
               value={enteredUserName}
               placeholder="Enter username"
             />
-            {userNameInputHasError && <small>Error message</small>}
+            {userNameInputHasError && <small>Enter username.</small>}
           </div>
           <div className={passwordInputClasses}>
             <label htmlFor="password">Password</label>
@@ -111,6 +120,9 @@ const LoginForm = (props) => {
           <button type="submit" disabled={!formIsValid}>
             Login
           </button>
+          {loginFailed && (
+              <small className="login-failed">Wrong username or password.</small>
+            )}
         </form>
       </div>
     </div>

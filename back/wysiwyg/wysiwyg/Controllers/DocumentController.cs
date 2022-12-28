@@ -5,11 +5,12 @@ using wysiwyg.Dto;
 using wysiwyg.Models;
 using wysiwyg.Tools;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 
 namespace wysiwyg.Controllers
 {
-    
+    [Authorize]
 	public class DocumentController : ControllerBase
 	{
 
@@ -25,14 +26,24 @@ namespace wysiwyg.Controllers
         [Route("createdoc")]
         public async Task<ActionResult> createDocument([FromBody] DocumentDto document)
         {
+            var doc = _context.Documents.FirstOrDefault(doc => doc.Name == document.Name);
 
-            Document newDoc = new Document(document.Name, document.UserId);
+            if (!_context.Documents.Any(doc => doc.Name == document.Name)){
 
-            _context.Documents.Add(newDoc);
+                Document newDoc = new Document(document.Name, document.UserId);
 
-            _context.SaveChanges();
+                _context.Documents.Add(newDoc);
 
-            return Ok("ok");
+                _context.SaveChanges();
+
+                return Ok("ok");
+            }
+            else
+            {
+                return BadRequest("Document with that name already exist!");
+            }
+
+            
         }
 
         [HttpGet]

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useInput from "../../hooks/use-input";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -8,6 +8,9 @@ import "./NewDocument.css";
 
 const NewDocument = () => {
   const dispatch = useDispatch();
+
+  const[errorMessage, setErrorMessage] = useState();
+  const [createFailed, setCreateFailed] = useState(false);
 
   const {
     value: enteredName,
@@ -36,6 +39,7 @@ const NewDocument = () => {
     const headers = {
       "Content-type": "application/json",
       Accept: "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     };
 
     axios
@@ -47,8 +51,10 @@ const NewDocument = () => {
         dispatch(routerActions.updateRoute("My Documents"));
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err.response.data);
+        setErrorMessage(err.response.data);
+        setCreateFailed(true);
+    });
   };
 
   const nameInputClasses = nameInputHasError
@@ -75,6 +81,7 @@ const NewDocument = () => {
           <button type="submit" disabled={!formIsValid}>
             Create Document
           </button>
+          {createFailed && <small className="create-failed">{errorMessage}</small>}
         </form>
       </div>
     </div>

@@ -7,10 +7,14 @@ import "./MyDocuments.css";
 const MyDocuments = () => {
   const [documents, setDocuments] = useState([]);
 
+  const headers = {
+    Authorization: `Bearer ${localStorage.getItem("token")}`
+  }
+
   useEffect(() => {
     const id = localStorage.getItem("userId");
     axios
-      .get("http://localhost:7127/getDocuments?id=" + id.toString())
+      .get("http://localhost:7127/getDocuments?id=" + id.toString(), {headers})
       .then((response) => {
         console.log(response.data);
         setDocuments(response.data);

@@ -20,6 +20,8 @@ const SaveButton = (props) => {
       const headers = {
         "Content-type": "application/json",
         Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+
       };
   
       axios
