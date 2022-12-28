@@ -10,7 +10,7 @@ const MyDocuments = () => {
   useEffect(() => {
     const id = localStorage.getItem("userId");
     axios
-      .get("http://localhost:7127/getDocuments?id=" + `${id}`)
+      .get("http://localhost:7127/getDocuments?id=" + id.toString())
       .then((response) => {
         console.log(response.data);
         setDocuments(response.data);
@@ -22,7 +22,7 @@ const MyDocuments = () => {
       <div className="documents-list">
         <h1>My Documents</h1>
         {documents.map((document) => (
-          <Document key={document.id} id={document.id} name={document.name} content = {document.latestContent} />
+          <Document key={document.id} id={document.id} name={document.name} content = {document.latestContent} version = {document.versionTag} />
         ))}
       </div>
     </div>

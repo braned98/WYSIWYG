@@ -21,6 +21,8 @@ function App() {
 
   const [initialDocument, updateDocument] = useState(InitialDocument);
 
+  const [key, setKey] = useState(1);
+
   const [registration, setRegistration] = useState(false);
   const [login, setLogin] = useState(false);
   const [editor, setEditor] = useState(true);
@@ -103,7 +105,7 @@ function App() {
   };
 
   const onMyDocumentsHandler = () => {
-    console.log("pozvan");
+    //console.log("pozvan");
     setLogin(false);
     setRegistration(false);
     setEditor(false);
@@ -125,7 +127,7 @@ function App() {
       {registration && <RegistrationForm></RegistrationForm>}
       {login && <LoginForm></LoginForm>}
       {editor && (
-        <Editor initialDocument={initialDocument} onChange={updateDocument} />
+        <Editor editorKey={key} setEditorKey={setKey} initialDocument={initialDocument} onChange={updateDocument} />
       )}
       {myDocuments && <MyDocuments></MyDocuments>}
       {newDocument && <NewDocument></NewDocument>}

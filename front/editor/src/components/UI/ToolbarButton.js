@@ -15,7 +15,7 @@ const ToolbarButton = (props) => {
     <button
       className="toolbarButton"
       onMouseDown={(event) => {
-        console.log("onMouseDown")
+        //console.log("onMouseDown")
         event.preventDefault();
         toggleStyle(editor, style);
       }}

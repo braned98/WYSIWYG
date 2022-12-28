@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useDispatch} from "react-redux";
 import { routerActions } from "../../store";
 import "./Document.css";
@@ -10,6 +9,8 @@ const Document = (props) => {
   const openDocumentHandler = () => {
     localStorage.setItem('currentDocument', props.id);
     localStorage.setItem('docContent', props.content);
+    localStorage.setItem('currentVersion', props.version);
+    localStorage.setItem('maxVersion', props.version)
     dispatch(routerActions.updateRoute('Document'));
   };
 
