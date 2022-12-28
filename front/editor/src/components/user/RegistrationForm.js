@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "./RegistrationForm.css";
 
 import useInput from "../../hooks/use-input";
 
-import { register } from "../../services/userService";
-
-
+import axios from 'axios';
 
 const RegistrationForm = (props) => {
+
+  const [errorMessage, setErrorMessage] = useState();
+  const [registerFailed, setRegisterFailed] = useState(false);
+
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -82,15 +84,24 @@ const RegistrationForm = (props) => {
     }
 
     const userData = {
-        'name': enteredName,
-        'username': enteredUserName,
-        'email': enteredEmail,
-        'password': enteredPassword
-    }
+      name: enteredName,
+      username: enteredUserName,
+      email: enteredEmail,
+      password: enteredPassword,
+    };
 
-    register(userData);
+    const headers = {
+      "Content-type": "application/json",
+      Accept: "application/json",
+    };
+    axios
+      .post("http://localhost:7127/register", userData, { headers })
+      .then((response) => console.log(response))
+      .catch((err) => {
+        setRegisterFailed(true);
+        setErrorMessage(err.response.data);
+      });
 
-    
     resetNameInput();
     resetEmailInput();
     resetUserNameInput();
@@ -189,6 +200,9 @@ const RegistrationForm = (props) => {
           <button type="submit" disabled={!formIsValid}>
             Submit
           </button>
+          {registerFailed && (
+              <small className="register-failed">{errorMessage}</small>
+            )}
         </form>
       </div>
     </div>

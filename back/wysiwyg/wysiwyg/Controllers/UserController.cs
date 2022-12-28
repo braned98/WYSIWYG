@@ -28,15 +28,25 @@ namespace wysiwyg.Controllers
 		[Route("register")]
 		public async Task<ActionResult> userRegistration([FromBody] UserDto user)
 		{
-			string passwordHash = Password.HashPassword(user.Password!);
+            if (!_context.Users.Any(u => u.Username == user.Username))
+            {
+                string passwordHash = Password.HashPassword(user.Password!);
 
-			User newUser = new User(user.Name, user.Username, passwordHash, user.Email);
+                User newUser = new User(user.Name, user.Username, passwordHash, user.Email);
 
-			_context.Users.Add(newUser);
+                _context.Users.Add(newUser);
 
-			_context.SaveChanges();
+                _context.SaveChanges();
 
-			return Ok("ok");
+                return Ok("ok");
+            }
+            else
+            {
+                return BadRequest("User with that username already exist!");
+            }
+
+
+            
 		}
 
 		[HttpPost]
