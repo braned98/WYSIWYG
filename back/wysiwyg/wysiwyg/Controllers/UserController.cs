@@ -28,6 +28,24 @@ namespace wysiwyg.Controllers
 		[Route("register")]
 		public async Task<ActionResult> userRegistration([FromBody] UserDto user)
 		{
+            if(user.Name == null || user.Name.Trim().Equals(""))
+            {
+                return BadRequest("Empty name.");
+
+            }else if(user.Username == null || user.Username.Trim().Equals(""))
+            {
+                return BadRequest("Empty username.");
+
+            }else if(user.Password == null || user.Password.Trim().Equals("") || user.Password.Length < 6)
+            {
+                return BadRequest("Bad password.");
+
+            }else if(user.Email == null || !user.Email.Contains('@'))
+            {
+                return BadRequest("Bad email.");
+            }
+
+
             if (!_context.Users.Any(u => u.Username == user.Username))
             {
                 string passwordHash = Password.HashPassword(user.Password!);

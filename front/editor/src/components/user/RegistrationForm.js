@@ -3,10 +3,13 @@ import React, { useState } from "react";
 import "./RegistrationForm.css";
 
 import useInput from "../../hooks/use-input";
+import { useDispatch } from "react-redux";
+import { routerActions } from "../../store/index";
 
-import axios from 'axios';
+import axios from "axios";
 
 const RegistrationForm = (props) => {
+  const dispatch = useDispatch();
 
   const [errorMessage, setErrorMessage] = useState();
   const [registerFailed, setRegisterFailed] = useState(false);
@@ -96,7 +99,9 @@ const RegistrationForm = (props) => {
     };
     axios
       .post("http://localhost:7127/register", userData, { headers })
-      .then((response) => console.log(response))
+      .then((response) => {
+        dispatch(routerActions.updateRoute("Login"));
+      })
       .catch((err) => {
         setRegisterFailed(true);
         setErrorMessage(err.response.data);
@@ -201,8 +206,8 @@ const RegistrationForm = (props) => {
             Submit
           </button>
           {registerFailed && (
-              <small className="register-failed">{errorMessage}</small>
-            )}
+            <small className="register-failed">{errorMessage}</small>
+          )}
         </form>
       </div>
     </div>
