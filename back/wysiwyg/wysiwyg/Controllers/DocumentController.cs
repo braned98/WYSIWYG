@@ -79,7 +79,16 @@ namespace wysiwyg.Controllers
 
             var version = _context.Versions.FirstOrDefault(version => (version.DocumentId == ver.Id && version.VersionTag == ver.VersionTag));
 
-            retVal.DocumentContent = version.Content;
+            if (version != null)
+            {
+                retVal.DocumentContent = version.Content;
+            }
+            else
+            {
+                var document = _context.Documents.FirstOrDefault(doc => doc.Id == ver.Id);
+                retVal.DocumentContent = document.LatestContent;
+
+            }
 
             return retVal;
         }

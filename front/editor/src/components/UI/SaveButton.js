@@ -2,7 +2,15 @@ import React from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 
-const saveHandler = (docContent, id) => {
+
+
+const SaveButton = (props) => {
+  const document = localStorage.getItem("docContent")
+  const documentId = localStorage.getItem("currentDocument");
+
+  const { icon, style } = props;
+
+  const saveHandler = (docContent, id) => {
     const documentData = {
         id: id,
         documentContent: docContent
@@ -22,17 +30,12 @@ const saveHandler = (docContent, id) => {
         .then((res) => {
           console.log(res);
           localStorage.setItem('maxVersion', res.data.versionTag)
+          props.setKey(props.slateKey);
         })
         .catch((err) => {
           console.log(err);
         });
 };
-
-const SaveButton = (props) => {
-  const document = localStorage.getItem("docContent")
-  const documentId = localStorage.getItem("currentDocument");
-
-  const { icon, style } = props;
 
   return (
     <button

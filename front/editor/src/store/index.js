@@ -3,6 +3,7 @@ import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   document: localStorage.getItem("currentDocument"),
+  version: localStorage.getItem("currentVersion") || 0.1,
 };
 
 const routerState = { route: localStorage.getItem("router") || "Login" };
@@ -25,6 +26,9 @@ const documentSlice = createSlice({
     setId(state, action) {
       state.document = action.payload;
     },
+    setVersion(state, action){
+        state.version = action.payload;
+    }
   },
 });
 

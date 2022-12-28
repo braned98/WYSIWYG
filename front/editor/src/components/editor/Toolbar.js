@@ -18,15 +18,12 @@ import PdfButton from "../UI/PdfButton";
 import axios from "axios";
 
 import { useDispatch} from "react-redux";
-import { routerActions } from "../../store";
+import { documentActions } from "../../store";
 
 const CHARACTER_STYLES = ["bold", "italic", "underline"];
 
 const Toolbar = (props) => {
   const versions = [];
-
-  const dispatch = useDispatch();
-
 
   const currentVersion = useMemo(() => {
     if (localStorage.getItem("currentVersion")) {
@@ -49,7 +46,8 @@ const Toolbar = (props) => {
     } else {
       return { value: 0.1, label: "v0.1" };
     }
-  }, []);
+  });
+  
 
   const changeHandler = (prop) => {
     localStorage.setItem("currentVersion", prop.value);
@@ -76,12 +74,15 @@ const Toolbar = (props) => {
         console.log(res.data.documentContent);
         localStorage.setItem("docContent", res.data.documentContent);
         console.log(localStorage.getItem("docContent"))
-        dispatch(routerActions.updateRoute('Document'));
-
+        props.setVersion(prop.value)
+        //window.location.reload();
+        props.setKey(props.slateKey + 1)
+        props.setEditorkey(props.editorKey + 1)
       })
       .catch((err) => {
         console.log(err);
       });
+
   };
 
   return (
@@ -93,7 +94,7 @@ const Toolbar = (props) => {
           icon={getIconForButton(style)}
         ></ToolbarButton>
       ))}
-      <SaveButton style="save" icon={getIconForButton("save")}></SaveButton>
+      <SaveButton slateKey={props.slateKey + 1} setKey={props.setKey} style="save" icon={getIconForButton("save")}></SaveButton>
       <PdfButton style="pdf" icon={getIconForButton("pdf")}></PdfButton>
       <Select
         className="react-select-container"
