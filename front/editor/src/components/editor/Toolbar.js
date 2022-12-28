@@ -1,4 +1,4 @@
-import React, { version, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import ToolbarButton from "../UI/ToolbarButton";
 import {
   FaBold,
@@ -17,8 +17,6 @@ import PdfButton from "../UI/PdfButton";
 
 import axios from "axios";
 
-import { useDispatch} from "react-redux";
-import { documentActions } from "../../store";
 
 const CHARACTER_STYLES = ["bold", "italic", "underline"];
 
@@ -52,18 +50,18 @@ const Toolbar = (props) => {
   const changeHandler = (prop) => {
     localStorage.setItem("currentVersion", prop.value);
 
-    console.log(prop.value);
+    //console.log(prop.value);
 
     const documentData = {
       id: localStorage.getItem("currentDocument"),
       versionTag: prop.value,
     };
 
-    console.log(documentData);
+    //console.log(documentData);
 
     const headers = {
       "Content-type": "application/json",
-      Accept: "application/json",
+      "Accept": "application/json",
     };
 
     axios
@@ -71,13 +69,13 @@ const Toolbar = (props) => {
         headers,
       })
       .then((res) => {
-        console.log(res.data.documentContent);
+        //console.log(res.data.documentContent);
         localStorage.setItem("docContent", res.data.documentContent);
         console.log(localStorage.getItem("docContent"))
         props.setVersion(prop.value)
         //window.location.reload();
         props.setKey(props.slateKey + 1)
-        props.setEditorkey(props.editorKey + 1)
+        props.setEditorKey(props.editorKey + 1)
       })
       .catch((err) => {
         console.log(err);
@@ -94,8 +92,8 @@ const Toolbar = (props) => {
           icon={getIconForButton(style)}
         ></ToolbarButton>
       ))}
-      <SaveButton slateKey={props.slateKey + 1} setKey={props.setKey} style="save" icon={getIconForButton("save")}></SaveButton>
-      <PdfButton style="pdf" icon={getIconForButton("pdf")}></PdfButton>
+      <SaveButton editorKey={props.editorKey} setEditorKey={props.setEditorKey} slateKey={props.slateKey} setKey={props.setKey} style={"save"} icon={getIconForButton("save")}></SaveButton>
+      <PdfButton style={"pdf"} icon={getIconForButton("pdf")}></PdfButton>
       <Select
         className="react-select-container"
         name="version"

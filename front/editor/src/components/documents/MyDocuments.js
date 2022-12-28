@@ -10,7 +10,7 @@ const MyDocuments = () => {
   useEffect(() => {
     const id = localStorage.getItem("userId");
     axios
-      .get("http://localhost:7127/getDocuments?id=" + `${id}`)
+      .get("http://localhost:7127/getDocuments?id=" + id.toString())
       .then((response) => {
         console.log(response.data);
         setDocuments(response.data);

@@ -1,20 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
-import fileDownload from "js-file-download";
 
 const exportHandler = (document) => {
   const docData = {
     content: document,
   };
-
-  //console.log(docData);
-
-  const headers = {
-    "Content-type": "application/json",
-  };
-
-
 
   axios
     .post("http://localhost:5001/export", JSON.stringify(docData), {
@@ -35,7 +25,7 @@ const exportHandler = (document) => {
 const PdfButton = (props) => {
   const document = localStorage.getItem("docContent");
 
-  const { icon, style } = props;
+  const { icon } = props;
 
   return (
     <button

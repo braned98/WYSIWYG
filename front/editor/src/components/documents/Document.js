@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useDispatch} from "react-redux";
 import { routerActions } from "../../store";
 import "./Document.css";

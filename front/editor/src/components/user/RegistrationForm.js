@@ -4,7 +4,7 @@ import "./RegistrationForm.css";
 
 import useInput from "../../hooks/use-input";
 
-import { login, register } from "../../services/userService";
+import { register } from "../../services/userService";
 
 
 
@@ -91,11 +91,11 @@ const RegistrationForm = (props) => {
     register(userData);
 
     
-    //resetNameInput();
-    //resetEmailInput();
-    //resetUserNameInput();
-    //resetPasswordInput();
-    //resetConfirmPasswordInput();
+    resetNameInput();
+    resetEmailInput();
+    resetUserNameInput();
+    resetPasswordInput();
+    resetConfirmPasswordInput();
   };
 
   const nameInputClasses = nameInputHasError

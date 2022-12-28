@@ -3,8 +3,7 @@ import React from "react";
 import "./Login.css";
 
 import useInput from "../../hooks/use-input";
-import { login } from "../../services/userService";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { userActions, routerActions } from "../../store/index";
 import axios from 'axios';
 
@@ -12,8 +11,6 @@ import axios from 'axios';
 
 const LoginForm = (props) => {
   const dispatch = useDispatch();
-
-  const user = useSelector((state) => state.user.user);
 
   const {
     value: enteredUserName,
@@ -68,8 +65,8 @@ const LoginForm = (props) => {
         console.log(err);
     })
 
-    //resetUserNameInput();
-    //resetPasswordInput();
+    resetUserNameInput();
+    resetPasswordInput();
   };
 
   const usernameInputClasses = userNameInputHasError

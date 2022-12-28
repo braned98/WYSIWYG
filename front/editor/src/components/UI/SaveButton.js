@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
 
 
 
@@ -8,7 +7,7 @@ const SaveButton = (props) => {
   const document = localStorage.getItem("docContent")
   const documentId = localStorage.getItem("currentDocument");
 
-  const { icon, style } = props;
+  const { icon } = props;
 
   const saveHandler = (docContent, id) => {
     const documentData = {
@@ -16,7 +15,7 @@ const SaveButton = (props) => {
         documentContent: docContent
       };
       
-      console.log(documentData)
+      //console.log(documentData)
   
       const headers = {
         "Content-type": "application/json",
@@ -30,7 +29,8 @@ const SaveButton = (props) => {
         .then((res) => {
           console.log(res);
           localStorage.setItem('maxVersion', res.data.versionTag)
-          props.setKey(props.slateKey);
+          props.setKey(props.slateKey + 1);
+          props.setEditorKey(props.editorKey + 1)
         })
         .catch((err) => {
           console.log(err);

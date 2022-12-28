@@ -105,7 +105,7 @@ function App() {
   };
 
   const onMyDocumentsHandler = () => {
-    console.log("pozvan");
+    //console.log("pozvan");
     setLogin(false);
     setRegistration(false);
     setEditor(false);
