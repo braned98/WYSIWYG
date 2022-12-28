@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ToolbarButton from "../UI/ToolbarButton";
 import {
   FaBold,
@@ -8,13 +8,81 @@ import {
   FaFilePdf,
 } from "react-icons/fa";
 
+import Select from "react-select";
+import "./react-select.css";
+
 import "./Toolbar.css";
 import SaveButton from "../UI/SaveButton";
 import PdfButton from "../UI/PdfButton";
 
+import axios from "axios";
+
+
 const CHARACTER_STYLES = ["bold", "italic", "underline"];
 
 const Toolbar = (props) => {
+  const versions = [];
+
+  const currentVersion = useMemo(() => {
+    if (localStorage.getItem("currentVersion")) {
+      for (
+        let i = localStorage.getItem("maxVersion");
+        i > 0.0;
+        i = (i - 0.1).toFixed(1)
+      ) {
+        const obj = {
+          value: i,
+          label: `v${i.toString()}`,
+        };
+        versions.push(obj);
+      }
+
+      return {
+        value: localStorage.getItem("currentVersion"),
+        label: `v${localStorage.getItem("currentVersion").toString()}`,
+      };
+    } else {
+      return { value: 0.1, label: "v0.1" };
+    }
+  });
+  
+
+  const changeHandler = (prop) => {
+    localStorage.setItem("currentVersion", prop.value);
+
+    //console.log(prop.value);
+
+    const documentData = {
+      id: localStorage.getItem("currentDocument"),
+      versionTag: prop.value,
+    };
+
+    //console.log(documentData);
+
+    const headers = {
+      "Content-type": "application/json",
+      "Accept": "application/json",
+    };
+
+    axios
+      .post("http://localhost:7127/getVersion", JSON.stringify(documentData), {
+        headers,
+      })
+      .then((res) => {
+        //console.log(res.data.documentContent);
+        localStorage.setItem("docContent", res.data.documentContent);
+        console.log(localStorage.getItem("docContent"))
+        props.setVersion(prop.value)
+        //window.location.reload();
+        props.setKey(props.slateKey + 1)
+        props.setEditorKey(props.editorKey + 1)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+  };
+
   return (
     <div className="toolbar">
       {CHARACTER_STYLES.map((style) => (
@@ -24,8 +92,15 @@ const Toolbar = (props) => {
           icon={getIconForButton(style)}
         ></ToolbarButton>
       ))}
-      <SaveButton style="save" icon={getIconForButton("save")}></SaveButton>
-      <PdfButton style="pdf" icon={getIconForButton("pdf")}></PdfButton>
+      <SaveButton editorKey={props.editorKey} setEditorKey={props.setEditorKey} slateKey={props.slateKey} setKey={props.setKey} style={"save"} icon={getIconForButton("save")}></SaveButton>
+      <PdfButton style={"pdf"} icon={getIconForButton("pdf")}></PdfButton>
+      <Select
+        className="react-select-container"
+        name="version"
+        options={versions}
+        defaultValue={currentVersion}
+        onChange={changeHandler}
+      ></Select>
     </div>
   );
 };

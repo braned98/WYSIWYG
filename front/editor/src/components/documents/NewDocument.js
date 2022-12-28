@@ -15,7 +15,6 @@ const NewDocument = () => {
     hasError: nameInputHasError,
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
-    reset: resetnameInput,
   } = useInput((value) => value.trim() !== "");
 
   let formIsValid = false;
